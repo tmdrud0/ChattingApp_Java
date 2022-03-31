@@ -45,21 +45,11 @@ public enum GoalStream{
     SEVER(Arrays.asList(SeverCommand.values())),
     CHANNEL(Arrays.asList(ChannelCommand.values())),
     USER(Arrays.asList(UserCommand.values()));
-
     private final List<? extends CommandType> com_list;
     GoalStream(List<? extends CommandType> com_list){
         this.com_list = com_list;
     }
-    static public GoalStream getStream(String s){
-        for(GoalStream gs : GoalStream.values())
-        for(CommandType ct : gs.com_list)
-        if(ct.is_same(s))   return gs;
-        return GoalStream.USER;
-    }
-    static public CommandType getCommandType(String s){
-        for(GoalStream gs : GoalStream.values())
-        for(CommandType ct : gs.com_list)
-        if(ct.is_same(s))   return ct;
-        return UserCommand.ERROR;
+    public List<? extends CommandType> getList(){
+        return com_list;
     }
 }

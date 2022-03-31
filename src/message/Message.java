@@ -7,9 +7,13 @@ public class Message implements Serializable{
     CommandType command_type;
     String message;
 
-    public Message(GoalStream gs, CommandType ct, String s)
-    {
+    public Message(GoalStream gs, CommandType ct, String s){
         goal_stream = gs;
+        command_type = ct;
+        message = s;
+    }
+    public Message(CommandType ct, String s){
+        goal_stream = MessageParser.getStream(ct);
         command_type = ct;
         message = s;
     }

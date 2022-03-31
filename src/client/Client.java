@@ -23,19 +23,21 @@ public class Client {
             sMap.get(GoalStream.USER).sendMessage(MessageParser.parse("/error"));
         }
     }
-    public ClientSender addSender(GoalStream gs, OutputStream output){
-        ClientSender cs = new ClientSender(output);
+    public void addSender(GoalStream gs, OutputStream output){
         try{
+            ClientSender cs = new ClientSender(output);
             sMap.put(gs,cs);
+            Thread csThread = new Thread(cs);
+            csThread.start();
         }catch(Exception e){    e.printStackTrace();System.exit(1);}
-        return cs;
     }
-    public ClientReceiver addReceiver(GoalStream gs, InputStream input){
-        ClientReceiver cr = new ClientReceiver(input);
+    public void addReceiver(GoalStream gs, InputStream input){
         try{
+            ClientReceiver cr = new ClientReceiver(input);
             rMap.put(gs,cr);
+            Thread crThread = new Thread(cr);
+            crThread.start();
         }catch(Exception e){    e.printStackTrace();System.exit(1);}
-        return cr;
     }
     public void addSocket(GoalStream gs,Socket socket){
         sockets.add(socket);

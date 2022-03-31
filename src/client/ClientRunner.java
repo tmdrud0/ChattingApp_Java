@@ -22,17 +22,12 @@ public class ClientRunner {
 
             printer = new MyPrinter(pis);
             scanner = new MyScanner(sos);
-            ClientReceiver uReceiver = client.addReceiver(GoalStream.USER, sis);
-            ClientSender uSender = client.addSender(GoalStream.USER, pos);
+            client.addReceiver(GoalStream.USER, sis);
+            client.addSender(GoalStream.USER, pos);
 
             Thread piThread = new Thread(printer);
-            Thread poThread = new Thread(uSender);
             Thread soThread = new Thread(scanner);
-            Thread siThread = new Thread(uReceiver);
-
             piThread.start();
-            poThread.start();
-            siThread.start();
             soThread.start();
         } catch (Exception e) {
             System.out.println("Fail to init User");
@@ -49,18 +44,19 @@ public class ClientRunner {
             e.printStackTrace();
             System.exit(1);
         }
+        System.out.println("succes connecting to sever");
     }
     static void login(){
+        System.out.println("");
         try {
             
         } catch (Exception e) {
-            System.out.println("Fail to login");
+            System.out.println("Failed to login");
             e.printStackTrace();
             System.exit(1);
         }
     }
     public static void main(String[] args) {
-        System.out.println("start");
         initUser();
       //initSever();
         //login();
